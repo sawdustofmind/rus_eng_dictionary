@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  word: Здравствуйте
+
+two:
+  word: Привет
+
+three:
+  word: Движение
+
+four:
+  word: Двигаться

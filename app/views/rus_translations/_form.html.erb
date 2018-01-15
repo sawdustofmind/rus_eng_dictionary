@@ -1,0 +1,27 @@
+<%= form_with(model: rus_translation, local: true) do |form| %>
+  <% if rus_translation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rus_translation.errors.count, "error") %> prohibited this rus_translation from being saved:</h2>
+
+      <ul>
+      <% rus_translation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :eng_word_id %>
+    <%= form.text_field :eng_word_id, id: :rus_translation_eng_word_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rus_word_id %>
+    <%= form.text_field :rus_word_id, id: :rus_translation_rus_word_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

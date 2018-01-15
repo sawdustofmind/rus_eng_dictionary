@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  eng_word: one
+  rus_word: one
+
+two:
+  eng_word: one
+  rus_word: two
+
+three:
+  eng_word: two
+  rus_word: three
+
+four:
+  eng_word: three
+  rus_word: four
