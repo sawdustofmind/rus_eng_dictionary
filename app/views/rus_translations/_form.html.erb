@@ -11,14 +11,20 @@
     </div>
   <% end %>
 
+
   <div class="field">
-    <%= form.label :eng_word_id %>
-    <%= form.text_field :eng_word_id, id: :rus_translation_eng_word_id %>
+    <%= form.label :part_of_speech %><br>
+    <%= form.select :part_of_speech, EngWord.part_of_speeches.keys %>
   </div>
 
   <div class="field">
-    <%= form.label :rus_word_id %>
-    <%= form.text_field :rus_word_id, id: :rus_translation_rus_word_id %>
+    <%= form.label :eng_word %>
+    <%= form.text_field :eng_word , word: :rus_translation_eng_word_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rus_word %>
+    <%= form.text_field :rus_word, word: :rus_translation_rus_word_id %>
   </div>
 
   <div class="actions">

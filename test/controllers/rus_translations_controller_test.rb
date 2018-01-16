@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class RusTranslationsControllerTest < ActionDispatch::IntegrationTest
+  fixtures :rus_words, :eng_words, :rus_translations
+
   setup do
     @rus_translation = rus_translations(:one)
   end
@@ -17,26 +19,19 @@ class RusTranslationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create rus_translation" do
     assert_difference('RusTranslation.count') do
-      post rus_translations_url, params: { rus_translation: { eng_word_id: @rus_translation.eng_word_id, rus_word_id: @rus_translation.rus_word_id } }
+      post rus_translations_url, 
+        params: { 
+          rus_translation: { 
+            part_of_speech: 'verb',
+            eng_word: 'go', 
+            rus_word: 'идти'
+          } 
+        }
     end
 
-    assert_redirected_to rus_translation_url(RusTranslation.last)
+    assert_redirected_to rus_translations_url
   end
 
-  test "should show rus_translation" do
-    get rus_translation_url(@rus_translation)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_rus_translation_url(@rus_translation)
-    assert_response :success
-  end
-
-  test "should update rus_translation" do
-    patch rus_translation_url(@rus_translation), params: { rus_translation: { eng_word_id: @rus_translation.eng_word_id, rus_word_id: @rus_translation.rus_word_id } }
-    assert_redirected_to rus_translation_url(@rus_translation)
-  end
 
   test "should destroy rus_translation" do
     assert_difference('RusTranslation.count', -1) do

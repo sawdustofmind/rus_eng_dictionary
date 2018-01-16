@@ -1,5 +1,5 @@
 class RusWord < ApplicationRecord
 	has_many :rus_translation
 
-	validates_uniqueness_of :word
+	validates :word, presence: true, uniqueness: true
 end

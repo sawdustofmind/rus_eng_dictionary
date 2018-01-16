@@ -7,4 +7,16 @@ class EngWordTest < ActiveSupport::TestCase
     assert eng_words(:two).part_of_speech == 'noun'
     assert eng_words(:three).part_of_speech == 'verb'
   end
+
+  test "uniqueness" do
+    EngWord.create(word: 'word', part_of_speech: 'noun')
+    assert_difference('EngWord.count', 0) do
+      EngWord.create(word: 'word', part_of_speech: 'noun')
+    end
+
+    assert_difference('EngWord.count', 1) do
+      EngWord.create(word: 'word', part_of_speech: 'verb')
+    end
+
+  end
 end

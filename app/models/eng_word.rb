@@ -10,6 +10,5 @@ class EngWord < ApplicationRecord
                         :determiner]
 
   has_many :rus_translation
-
-  validates_uniqueness_of :word
+  validates :word, presence: true, uniqueness: { scope: :part_of_speech }
 end
