@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vocabulary_test: one
+  rus_translation: one
+  right: false
+
+two:
+  vocabulary_test: two
+  rus_translation: two
+  right: false

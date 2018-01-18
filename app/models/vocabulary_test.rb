@@ -1,0 +1,2 @@
+class VocabularyTest < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115181537) do
+ActiveRecord::Schema.define(version: 20180118080955) do
 
   create_table "eng_words", force: :cascade do |t|
     t.string "word"
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(version: 20180115181537) do
 
   create_table "rus_words", force: :cascade do |t|
     t.string "word"
+  end
+
+  create_table "test_line_items", force: :cascade do |t|
+    t.integer "vocabulary_test_id"
+    t.integer "rus_translation_id"
+    t.boolean "right"
+    t.index ["rus_translation_id"], name: "index_test_line_items_on_rus_translation_id"
+    t.index ["vocabulary_test_id"], name: "index_test_line_items_on_vocabulary_test_id"
+  end
+
+  create_table "vocabulary_tests", force: :cascade do |t|
+    t.datetime "sent"
+    t.integer "interval"
+    t.boolean "passed"
   end
 
 end
