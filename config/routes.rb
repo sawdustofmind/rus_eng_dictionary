@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :rus_translations, 
     only: [:index, :new, :create, :destroy]
     
