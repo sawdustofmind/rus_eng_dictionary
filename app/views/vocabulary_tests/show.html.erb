@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<table cellspacing="0" border="1">
+  <tr>
+    <td>eng_word</td>
+    <% TestLineItem::OPTIONS_COUNT.times do |n| %>
+      <td>option<%= n + 1 %></td>
+    <% end %>
+  </tr>
+<% @vocabulary_test.test_line_items.each do |line_item|%>
+  <tr>
+    <td><%= line_item.eng_word.word %></td>
+    <% line_item.test_options.shuffle.each do |test_option| %>
+      <td><%= test_option.option %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+
+<%= link_to 'Edit', edit_vocabulary_test_path(@vocabulary_test) %> |
+<%= link_to 'Back', vocabulary_tests_path %>

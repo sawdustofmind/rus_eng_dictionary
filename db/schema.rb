@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121164121) do
+ActiveRecord::Schema.define(version: 20180121201657) do
 
   create_table "eng_words", force: :cascade do |t|
     t.string "word"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20180121164121) do
   end
 
   create_table "test_options", force: :cascade do |t|
+    t.integer "test_line_item_id"
+    t.text "option"
+    t.index ["test_line_item_id"], name: "index_test_options_on_test_line_item_id"
   end
 
   create_table "test_result_line_items", force: :cascade do |t|
