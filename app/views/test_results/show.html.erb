@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Results</h1>
+<table cellspacing="0" border="1">
+  <tr>
+    <td>part_of_speech</td>
+    <td>eng_word</td>
+    <td>answer</td>
+    <td>right</td>
+  </tr>
+  <% @test_result.test_result_line_items.each do |line_item|%>
+    <tr>
+      <td><%= line_item.eng_word.part_of_speech %></td>
+      <td><%= line_item.eng_word.word %></td>
+      <td><%= line_item.answer %></td>
+      <td><%= line_item.right %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', edit_test_result_path(@test_result) %> |
+<%= link_to 'Back', test_results_path %>

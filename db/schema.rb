@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121201657) do
+ActiveRecord::Schema.define(version: 20180122100243) do
 
   create_table "eng_words", force: :cascade do |t|
     t.string "word"
@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 20180121201657) do
   end
 
   create_table "test_result_line_items", force: :cascade do |t|
-    t.integer "end_word_id"
+    t.integer "eng_word_id"
     t.integer "test_result_id"
     t.text "answer"
     t.boolean "right"
-    t.index ["end_word_id"], name: "index_test_result_line_items_on_end_word_id"
+    t.index ["eng_word_id"], name: "index_test_result_line_items_on_eng_word_id"
     t.index ["test_result_id"], name: "index_test_result_line_items_on_test_result_id"
   end
 
