@@ -1,6 +1,6 @@
 class VocabularyTest < ApplicationRecord
   ITEMS_COUNT = 20
-  STANDARD_INTERVAL = 30
+  STANDARD_INTERVAL = 30.minutes
 
   belongs_to :user
   has_many :test_line_items
@@ -13,7 +13,7 @@ class VocabularyTest < ApplicationRecord
       TestLineItem.generate eng_word, vocabulary_test
     end
 
-    vocabulary_test.sent = Time.now.to_i
+    vocabulary_test.sent = Time.now
     vocabulary_test.save
     vocabulary_test
   end

@@ -1,5 +1,6 @@
 class TestResultsController < ApplicationController
-  before_action :set_test_result, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_test_result, only: [:show, :destroy]
 
   # GET /test_results
   # GET /test_results.json
@@ -12,52 +13,29 @@ class TestResultsController < ApplicationController
   def show
   end
 
-  # GET /test_results/new
-  def new
-    @test_result = TestResult.new
-  end
-
-  # GET /test_results/1/edit
-  def edit
-  end
-
   # POST /test_results
   # POST /test_results.json
   def create
-    @test_result = TestResult.new(user: current_user)
-    results_keys = params.keys.select{|key| key =~ /^\d+$/}
-    results_keys.each do |result_key|
-      result = params[result_key]
-      eng_word = EngWord.find_by word: result["eng_word"]["word"],
-                                 part_of_speech: result["eng_word"]["part_of_speech"]
-      answer = result['rus_word']
-      right_options = eng_word.rus_words.map{|elem| elem.word}
-      right = right_options.include? answer
-      @test_result.test_result_line_items.build eng_word: eng_word, answer: answer, right: right
+    # creating the result model
+    vocabulary_test = VocabularyTest.find params[:test_id].to_i
+    remaining = Time.now - vocabulary_test.sent
+    @test_result = TestResult.create user: current_user,
+     total_time: vocabulary_test.interval, remaining: remaining
+
+    test_result_params.each do |eng_word_id, answer|
+      eng_word = EngWord.find eng_word_id.to_i
+      right_answers = eng_word.rus_words.map{|rus_word| rus_word.word}
+      right = right_answers.include? answer
+      @test_result.test_result_line_items.build \
+        eng_word: eng_word, answer: answer, right: right
     end
 
-    respond_to do |format|
-      if @test_result.save
-        format.html { redirect_to @test_result, notice: 'Test result was successfully created.' }
-        format.json { render :show, status: :created, location: @test_result }
-      else
-        format.html { render :new }
-        format.json { render json: @test_result.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+    # destoy useless test
+    vocabulary_test.destroy
 
-  # PATCH/PUT /test_results/1
-  # PATCH/PUT /test_results/1.json
-  def update
     respond_to do |format|
-      if @test_result.update(test_result_params)
-        format.html { redirect_to @test_result, notice: 'Test result was successfully updated.' }
-        format.json { render :show, status: :ok, location: @test_result }
-      else
-        format.html { render :edit }
-        format.json { render json: @test_result.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @test_result, notice: 'Test result was successfully created.' }
+      format.json { render :show, status: :created, location: @test_result }
     end
   end
 
@@ -74,11 +52,16 @@ class TestResultsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_test_result
+      raise ActiveRecord::RecordNotFound \
+        unless current_user.test_result_ids.include? params[:id].to_i
       @test_result = TestResult.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def test_result_params
-      params.fetch(:test_result, {})
+      puts
+      raise ActiveRecord::RecordNotFound \
+        unless current_user.vocabulary_test_ids.include? params[:test_id].to_i
+      params.fetch(:test_results, {})
     end
 end

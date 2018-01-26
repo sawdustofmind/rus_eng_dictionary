@@ -12,8 +12,8 @@
   <tbody>
     <% @test_results.each do |test_result| %>
       <tr>
+        <td><%= test_result.created_at %></td>
         <td><%= link_to 'Show', test_result %></td>
-        <td><%= link_to 'Edit', edit_test_result_path(test_result) %></td>
         <td><%= link_to 'Destroy', test_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -22,4 +22,3 @@
 
 <br>
 
-<%= link_to 'New Test Result', new_test_result_path %>

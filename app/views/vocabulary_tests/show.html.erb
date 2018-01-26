@@ -1,14 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <%= form_tag(test_results_path, method: 'post') do %>
-  <% @vocabulary_test.test_line_items.each_with_index do |line_item, i|%>
-    <%# it will be perfect to send an array, but radio buttons makes me sad %>
+  <%= hidden_field_tag("test_id",  @vocabulary_test.id) %>
+  <% @vocabulary_test.test_line_items.each do |line_item|%>
     <p><%= line_item.eng_word.part_of_speech %>: <%= line_item.eng_word.word %></p>
-    <%= hidden_field_tag("[#{i}][eng_word][word]", line_item.eng_word.word) %>
-    <%= hidden_field_tag("[#{i}][eng_word][part_of_speech]", line_item.eng_word.part_of_speech) %>
-
       <% line_item.test_options.shuffle.each do |test_option| %>
-          <%= radio_button_tag "[#{i}][rus_word]", test_option.option %>
+          <%= radio_button_tag "test_results[#{line_item.eng_word.id}]", test_option.option %>
           <%= label_tag test_option.option %>
       <% end %>
     <hr />
@@ -19,6 +16,4 @@
   </div>
 <% end %>
 
-
-<%= link_to 'Edit', edit_vocabulary_test_path(@vocabulary_test) %> |
 <%= link_to 'Back', vocabulary_tests_path %>

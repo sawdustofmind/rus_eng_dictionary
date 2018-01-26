@@ -12,14 +12,15 @@
   <tbody>
     <% @vocabulary_tests.each do |vocabulary_test| %>
       <tr>
+        <td><%= vocabulary_test.sent %></td>
         <td><%= link_to 'Show', vocabulary_test %></td>
-        <td><%= link_to 'Edit', edit_vocabulary_test_path(vocabulary_test) %></td>
         <td><%= link_to 'Destroy', vocabulary_test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<div class="form-new">
+  <%= button_to "Create", { action: "create" } %>
+</div>
 <br>
-
-<%= link_to 'New Vocabulary Test', new_vocabulary_test_path %>
