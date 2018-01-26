@@ -7,13 +7,14 @@ class VocabularyTest < ApplicationRecord
 
   def VocabularyTest.generate(user)
     vocabulary_test = VocabularyTest.create user: user, interval: STANDARD_INTERVAL
-    eng_words = EngWord.order('RANDOM()').limit(ITEMS_COUNT)
+    eng_words = EngWord.order(DATABASE_RANDOM_FUNCTION).limit(ITEMS_COUNT)
 
     eng_words.each do |eng_word|
-      TestLineItem.generate vocabulary_test, eng_word
+      TestLineItem.generate eng_word, vocabulary_test
     end
 
     vocabulary_test.sent = Time.now.to_i
+    vocabulary_test.save
     vocabulary_test
   end
 end

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  end_word: one
+  eng_word: one
   test_result: one
   answer: MyText
   right: false
 
 two:
-  end_word: two
+  eng_word: two
   test_result: two
   answer: MyText
   right: false

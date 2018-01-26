@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  eng_word: one
+hello_noun_translation_one:
+  eng_word: hello_noun
   rus_word: one
 
-two:
-  eng_word: one
+hello_noun_translation_two:
+  eng_word: hello_noun
   rus_word: two
 
-three:
-  eng_word: two
+move_noun_translation:
+  eng_word: move_noun
   rus_word: three
 
-four:
-  eng_word: three
+move_verb_translation:
+  eng_word: move_verb
   rus_word: four

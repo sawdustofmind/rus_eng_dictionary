@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+hello_noun:
   word: hello
   part_of_speech: 'noun'
 
-two:
+move_noun:
   word: move
   part_of_speech: 'noun'
 
-three:
+move_verb:
   word: move
   part_of_speech: 'verb'

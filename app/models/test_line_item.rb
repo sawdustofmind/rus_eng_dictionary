@@ -5,9 +5,20 @@ class TestLineItem < ApplicationRecord
   belongs_to :eng_word
 
   has_many :test_options
+  validates_uniqueness_of :eng_word, scope: :vocabulary_test
 
-  def TestLineItem.generate(vocabulary_test, eng_word)
+  def TestLineItem.generate(eng_word, vocabulary_test)
     line_item = vocabulary_test.test_line_items.build eng_word: eng_word
-    TestOption.generate line_item, OPTIONS_COUNT
+
+    right_answers = line_item.eng_word.rus_words
+    right_answers_ids = right_answers.map{|rus_word| rus_word.id}
+
+    other_words = RusWord.where.not(id: right_answers_ids)
+                      .order(DATABASE_RANDOM_FUNCTION).limit(OPTIONS_COUNT - 1)
+
+    line_item.test_options.build option: right_answers.sample
+    other_words.each do |another_rus_word|
+      line_item.test_options.build option: another_rus_word.word
+    end
   end
 end

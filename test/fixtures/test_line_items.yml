@@ -2,10 +2,8 @@
 
 one:
   vocabulary_test: one
-  rus_translation: one
-  right: false
+  eng_word: one
 
 two:
   vocabulary_test: two
-  rus_translation: two
-  right: false
+  eng_word: two

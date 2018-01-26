@@ -3,11 +3,11 @@ require 'test_helper'
 class RusTranslationTest < ActiveSupport::TestCase
   fixtures :rus_translations
 
-  def assert_differences(rus_translation_dif, eng_word_dif, rus_word_dif, &block)
+  def assert_differences(rus_translation_dif, eng_word_dif, rus_word_dif)
     assert_difference('RusTranslation.count', rus_translation_dif) do
       assert_difference('EngWord.count', eng_word_dif) do
         assert_difference('RusWord.count', rus_word_dif) do
-          block.call
+          yield
         end
       end
     end
@@ -16,13 +16,13 @@ class RusTranslationTest < ActiveSupport::TestCase
   test "before_destroy trigger" do
 
     # should destroys only russian word
-    rus_translations = rus_translations(:one) # hello
+    rus_translations = rus_translations(:hello_noun_translation_one) # hello
     assert_differences(-1, 0, -1) do
       rus_translations.destroy
     end
 
     # should destroys all
-    rus_translations = rus_translations(:two)
+    rus_translations = rus_translations(:hello_noun_translation_two)
     assert_differences(-1, -1, -1) do
       rus_translations.destroy
     end
@@ -30,7 +30,7 @@ class RusTranslationTest < ActiveSupport::TestCase
 
   test "uniqueness" do
     assert_difference('EngWord.count', 0) do
-      RusTranslation.create rus_word: rus_words(:one), eng_word: eng_words(:one)
+      RusTranslation.create rus_word: rus_words(:one), eng_word: eng_words(:hello_noun)
     end
   end
 end
