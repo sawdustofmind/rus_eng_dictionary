@@ -9,7 +9,7 @@ class EngWord < ApplicationRecord
                         :interjection,
                         :determiner]
 
-  has_many :rus_translation
-  has_many :rus_words, through: :rus_translation
+  has_many :rus_translations
+  has_many :rus_words, through: :rus_translations
   validates :word, presence: true, uniqueness: { scope: :part_of_speech }
 end

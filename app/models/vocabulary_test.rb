@@ -3,7 +3,7 @@ class VocabularyTest < ApplicationRecord
   STANDARD_INTERVAL = 30.minutes
 
   belongs_to :user
-  has_many :test_line_items
+  has_many :test_line_items, dependent: :destroy
 
   def VocabularyTest.generate(user)
     vocabulary_test = VocabularyTest.create user: user, interval: STANDARD_INTERVAL

@@ -7,37 +7,17 @@ class RusTranslationsController < ApplicationController
     @rus_translations = RusTranslation.all
   end
 
-  # GET /rus_translations/new
-  def new
-    @rus_translation = RusTranslation.new
-  end
-
   # POST /rus_translations
   # POST /rus_translations.json
   def create
-    # parsing parameters  
-    part_of_speech = rus_translation_params[:part_of_speech]
-    rus_word_value = rus_translation_params[:rus_word]
-    eng_word_value = rus_translation_params[:eng_word]
-
-    # getting / creating words entries
-    eng_word = EngWord.find_by(word: eng_word_value, part_of_speech: part_of_speech) \
-      || EngWord.create(word: eng_word_value, part_of_speech: part_of_speech)
-    rus_word = RusWord.find_by(word: rus_word_value) \
-      || RusWord.create(word: rus_word_value)
-
-    # creating rus_translation entry
-    @rus_translation = RusTranslation.new
-    @rus_translation.eng_word = eng_word
-    @rus_translation.rus_word = rus_word
-
+    @rus_translation = RusTranslation.from_params rus_translation_params
     # render
     respond_to do |format|
       if @rus_translation.save
         format.html { redirect_to rus_translations_path, notice: 'Rus translation was successfully created.' }
-        format.json { render :show, status: :created, location: @rus_translation }
+        format.json { head :no_content }
       else
-        format.html { render :new }
+        format.html { index; render :index }
         format.json { render json: @rus_translation.errors, status: :unprocessable_entity }
       end
     end

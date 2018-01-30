@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class VocabularyTestsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    sign_in users(:tom)
     @vocabulary_test = vocabulary_tests(:one)
   end
 
@@ -10,32 +13,19 @@ class VocabularyTestsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_vocabulary_test_url
-    assert_response :success
-  end
-
   test "should create vocabulary_test" do
-    assert_difference('VocabularyTest.count') do
-      post vocabulary_tests_url, params: { vocabulary_test: {  } }
+    assert_difference('VocabularyTest.count', 1) do
+      post vocabulary_tests_url
     end
 
     assert_redirected_to vocabulary_test_url(VocabularyTest.last)
   end
 
   test "should show vocabulary_test" do
+    puts '-' * 100, users(:tom).inspect, '-' * 100
+    puts '-' * 100, @vocabulary_test.user.inspect, '-' * 100
     get vocabulary_test_url(@vocabulary_test)
     assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_vocabulary_test_url(@vocabulary_test)
-    assert_response :success
-  end
-
-  test "should update vocabulary_test" do
-    patch vocabulary_test_url(@vocabulary_test), params: { vocabulary_test: {  } }
-    assert_redirected_to vocabulary_test_url(@vocabulary_test)
   end
 
   test "should destroy vocabulary_test" do

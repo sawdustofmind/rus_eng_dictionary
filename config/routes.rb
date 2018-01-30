@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :rus_translations, 
-    only: [:index, :new, :create, :destroy]
+    only: [:index, :create, :destroy]
   resources :vocabulary_tests,
     only: [:create, :index, :show, :destroy]
   resources :test_results,

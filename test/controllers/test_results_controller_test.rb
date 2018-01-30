@@ -10,11 +10,6 @@ class TestResultsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_test_result_url
-    assert_response :success
-  end
-
   test "should create test_result" do
     assert_difference('TestResult.count') do
       post test_results_url, params: { test_result: {  } }

@@ -4,7 +4,7 @@ class TestLineItem < ApplicationRecord
   belongs_to :vocabulary_test
   belongs_to :eng_word
 
-  has_many :test_options
+  has_many :test_options, dependent: :destroy
   validates_uniqueness_of :eng_word, scope: :vocabulary_test
 
   def TestLineItem.generate(eng_word, vocabulary_test)

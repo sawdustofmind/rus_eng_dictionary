@@ -33,4 +33,22 @@ class RusTranslationTest < ActiveSupport::TestCase
       RusTranslation.create rus_word: rus_words(:one), eng_word: eng_words(:hello_noun)
     end
   end
+
+  test "presence" do
+    assert_difference('RusTranslation.count', 0) do
+      RusTranslation.create
+    end
+
+    assert_difference('RusTranslation.count', 0) do
+      RusTranslation.create rus_word: rus_words(:one)
+    end
+
+    assert_difference('RusTranslation.count', 0) do
+      RusTranslation.create eng_word: eng_words(:hello_noun)
+    end
+
+    assert_difference('RusTranslation.count', 1) do
+      RusTranslation.create eng_word: eng_words(:hello_noun), rus_word: rus_words(:four)
+    end
+  end
 end

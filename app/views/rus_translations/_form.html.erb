@@ -14,17 +14,20 @@
 
   <div class="field">
     <%= form.label :part_of_speech %><br>
-    <%= form.select :part_of_speech, EngWord.part_of_speeches.keys %>
+    <%= form.select :part_of_speech, EngWord.part_of_speeches.keys,
+      selected: "#{rus_translation.eng_word.part_of_speech if rus_translation.eng_word}" %>
   </div>
 
   <div class="field">
     <%= form.label :eng_word %>
-    <%= form.text_field :eng_word , word: :rus_translation_eng_word_id %>
+    <%= form.text_field :eng_word , word: :rus_translation_eng_word_id,
+      value: "#{rus_translation.eng_word.word if rus_translation.eng_word}" %>
   </div>
 
   <div class="field">
     <%= form.label :rus_word %>
-    <%= form.text_field :rus_word, word: :rus_translation_rus_word_id %>
+    <%= form.text_field :rus_word, word: :rus_translation_rus_word_id,
+      value: "#{rus_translation.rus_word.word if rus_translation.rus_word}"%>
   </div>
 
   <div class="actions">

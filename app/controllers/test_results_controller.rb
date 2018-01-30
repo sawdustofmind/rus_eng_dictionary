@@ -5,7 +5,7 @@ class TestResultsController < ApplicationController
   # GET /test_results
   # GET /test_results.json
   def index
-    @test_results = TestResult.all
+    @test_results = current_user.test_results
   end
 
   # GET /test_results/1

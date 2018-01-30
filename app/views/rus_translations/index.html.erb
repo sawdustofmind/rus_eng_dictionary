@@ -2,6 +2,7 @@
 
 <h1>Rus Translations</h1>
 
+<%= render 'form', rus_translation: @rus_translation || RusTranslation.new %>
 <table>
   <thead>
     <tr>
@@ -26,5 +27,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Rus Translation', new_rus_translation_path %>

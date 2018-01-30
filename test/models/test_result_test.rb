@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class TestResultTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  fixtures :test_results
+  test "depend destroy" do
+    assert_difference('TestResult.count', -1) do
+      assert_difference('TestResultLineItem.count', -1) do
+        test_results(:one).destroy
+      end
+    end
+  end
 end
