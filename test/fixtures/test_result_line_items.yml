@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  eng_word: one
+  eng_word: move_verb
   test_result: one
-  answer: MyText
-  right: false
+  answer: двигаться
+  right: true
 
 two:
-  eng_word: two
-  test_result: two
-  answer: MyText
+  eng_word: move_noun
+  test_result: one
+  answer: привет
   right: false

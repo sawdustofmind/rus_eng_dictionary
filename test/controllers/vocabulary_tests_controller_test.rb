@@ -22,8 +22,6 @@ class VocabularyTestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show vocabulary_test" do
-    puts '-' * 100, users(:tom).inspect, '-' * 100
-    puts '-' * 100, @vocabulary_test.user.inspect, '-' * 100
     get vocabulary_test_url(@vocabulary_test)
     assert_response :success
   end

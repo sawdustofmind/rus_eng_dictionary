@@ -2,8 +2,8 @@
 
 one:
   vocabulary_test: one
-  eng_word: one
+  eng_word: hello_noun
 
 two:
   vocabulary_test: two
-  eng_word: two
+  eng_word: move_noun
